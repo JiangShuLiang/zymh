@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragment.HomeFragment">
+
+    <RelativeLayout
+        android:background="@color/gray4"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingLeft="10dp">
+
+
+        <LinearLayout
+            android:id="@+id/layout_order"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_order"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="正序"
+                android:textSize="13sp"
+                android:textColor="@color/black2" />
+
+            <ImageView
+                android:id="@+id/iv_order"
+                android:layout_width="37dp"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                app:srcCompat="@mipmap/ic_asc" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_update_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="更新到第六章"
+            android:textColor="@color/black2" />
+    </RelativeLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white" />
+</LinearLayout>

@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">掌缘漫画</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--<string name="email_postfix">&#064;QQ.com</string>-->
+    <string name="email_postfix">QQ.com</string>
+
+    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>

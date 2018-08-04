@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.zymh.www.zymh">
+
+    <!-- 权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <application
+        android:name=".Utils.CustomApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_app_icon"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- tools:replace="android:name" -->
+
+
+        <!-- <activity -->
+        <!-- android:name=".activity.activity.MainActivity" -->
+        <!-- android:theme="@style/ImmersiveTheme"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
+        <activity
+            android:name=".activity.WelcomeActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:theme="@style/FullScreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:theme="@style/ImmersiveTheme" />
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:theme="@style/ImmersiveTheme" />
+        <activity
+            android:name=".activity.ForgetActivity"
+            android:theme="@style/ImmersiveTheme" />
+        <activity
+            android:name=".activity.TestActivity"
+            android:theme="@style/ImmersiveTheme" />
+        <activity
+            android:name=".activity.SearchActivity"
+            android:theme="@style/ImmersiveTheme" />
+        <activity
+            android:name=".activity.WebActivity"
+            android:theme="@style/ImmersiveTheme" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:theme="@style/ImmersiveTheme" />
+        <activity
+            android:name=".activity.ComicDetailActivity"
+            android:theme="@style/ImmersiveTheme" />
+        <activity
+            android:name=".activity.ComicGroupActivity"
+            android:theme="@style/ImmersiveTheme" />
+        <activity
+            android:name=".activity.ComicReadActivity"
+            android:theme="@style/FullScreenTheme" />
+    </application>
+
+</manifest>

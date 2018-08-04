@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".fragment.HomeFragment">
+
+    <TextView
+        android:id="@+id/tv_cartoonist"
+        android:gravity="center"
+        android:textColor="@color/black2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="作者" />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:text="漫画介绍：" />
+
+    <TextView
+        android:layout_marginTop="5dp"
+        android:id="@+id/tv_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black2"
+        android:text="具体介绍文字" />
+
+</LinearLayout>

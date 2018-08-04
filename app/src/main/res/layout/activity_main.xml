@@ -1,0 +1,83 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundDimAmount="0.6"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#888" />
+
+    <com.zymh.www.zymh.views.AlphaIndicator
+        android:id="@+id/alphaIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingTop="2dp"
+        android:orientation="horizontal">
+
+        <com.zymh.www.zymh.views.AlphaView
+            android:id="@+id/item_home"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            app:av_tabIconNormal="@mipmap/ic_tabbar_home"
+            app:av_tabIconSelected="@mipmap/ic_tabbar_home_selected"
+            app:av_tabText="首页"
+            app:av_tabTextSize="12sp"
+            app:av_textColorNormal="#999999"
+            app:av_textColorSelected="@color/colorPrimary" />
+
+        <com.zymh.www.zymh.views.AlphaView
+            android:id="@+id/item_update"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            app:av_tabIconNormal="@mipmap/ic_tabbar_update"
+            app:av_tabIconSelected="@mipmap/ic_tabbar_update_selected"
+            app:av_tabText="更新"
+            app:av_tabTextSize="12sp"
+            app:av_textColorNormal="#999999"
+            app:av_textColorSelected="@color/colorPrimary" />
+
+
+        <com.zymh.www.zymh.views.AlphaView
+            android:id="@+id/item_books"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            app:av_tabIconNormal="@mipmap/ic_tabbar_collection"
+            app:av_tabIconSelected="@mipmap/ic_tabbar_collection_selected"
+            app:av_tabText="书架"
+            app:av_tabTextSize="12sp"
+            app:av_textColorNormal="#999999"
+            app:av_textColorSelected="@color/colorPrimary" />
+
+
+        <com.zymh.www.zymh.views.AlphaView
+            android:id="@+id/item_mine"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            app:av_tabIconNormal="@mipmap/ic_tabbar_me"
+            app:av_tabIconSelected="@mipmap/ic_tabbar_me_selected"
+            app:av_tabText="我的"
+            app:av_tabTextSize="12sp"
+            app:av_textColorNormal="#999999"
+            app:av_textColorSelected="@color/colorPrimary" />
+
+
+    </com.zymh.www.zymh.views.AlphaIndicator>
+</LinearLayout>
