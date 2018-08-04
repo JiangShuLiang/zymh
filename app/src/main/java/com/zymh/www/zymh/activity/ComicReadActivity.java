@@ -122,17 +122,32 @@ public class ComicReadActivity extends AppCompatActivity implements View.OnClick
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+                // RecyclerView滑动时，上下两个bar隐藏
                 if (newState == 1) {//newState=1表示此时有在滑动
                     if (layoutTop.getVisibility() == View.VISIBLE) {
                         setBarVisibility(false);
                     }
                 }
+
+
+                // 一章漫画看完（即滚动到最底部）就把上下两个bar显示出来
+                LinearLayoutManager lm = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int totalItemCount = recyclerView.getAdapter().getItemCount();
+                int lastVisibleItemPosition = lm.findLastVisibleItemPosition();
+                int visibleItemCount = recyclerView.getChildCount();
+                if (newState == RecyclerView.SCROLL_STATE_IDLE
+                        && lastVisibleItemPosition == totalItemCount - 1
+                        && visibleItemCount > 0) {
+                    setBarVisibility(true);
+                }
             }
         });
+
         comicPagesAdapter = new ComicPagesAdapter(this, R.layout.item_page, listPages);
         comicPagesAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
         comicPagesAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {

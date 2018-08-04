@@ -22,6 +22,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 finish();
             }
         };
-        handler.postDelayed(runnable, 2000);
+        handler.postDelayed(runnable, 1300);
     }
 }

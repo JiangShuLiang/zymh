@@ -4,6 +4,7 @@ package com.zymh.www.zymh.Utils;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.app.FragmentManager;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -12,6 +13,9 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 
+import com.mylhyl.circledialog.CircleDialog;
+import com.mylhyl.circledialog.callback.ConfigButton;
+import com.mylhyl.circledialog.params.ButtonParams;
 import com.zymh.www.zymh.R;
 
 import org.json.JSONException;
@@ -130,8 +134,7 @@ public class Utils {
         return format.format(date);
     }
 
-
-    // isDownward是否是向下做动画的
+    // isDownward：是否是向下做动画的
     public static TranslateAnimation getShowAnim(boolean isDownward) {
         TranslateAnimation mShowAction = null;
         if (isDownward) {
@@ -151,6 +154,7 @@ public class Utils {
         return mShowAction;
     }
 
+    // isDownward：是否是向下做动画的
     public static TranslateAnimation getHideAnim(boolean isDownward) {
         TranslateAnimation mHiddenAction = null;
         if (isDownward) {
@@ -168,5 +172,30 @@ public class Utils {
         }
         mHiddenAction.setDuration(500);
         return mHiddenAction;
+    }
+
+
+    public static void showConfirmDialog(Context context, FragmentManager fragmentManager, String title, String contentText,String positiveButtonText ,final View.OnClickListener confirmListener) {
+        new CircleDialog.Builder()
+                .setTitle(title)
+                .setTitleColor(0xffff8EB3)
+                .setText(contentText)
+                .setTextColor(0xff000000)
+                .setPositive(positiveButtonText, confirmListener)
+                .configPositive(new ConfigButton() {
+                    @Override
+                    public void onConfig(ButtonParams params) {
+                        params.textColor = 0xffff8EB3;
+                        params.textSize = 50;
+                    }
+                })
+                .setNegative("取消", null)
+                .configNegative(new ConfigButton() {
+                    @Override
+                    public void onConfig(ButtonParams params) {
+                        params.textSize = 50;
+                    }
+                })
+                .show(fragmentManager);
     }
 }

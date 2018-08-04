@@ -10,12 +10,14 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.gyf.barlibrary.ImmersionBar;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
@@ -36,7 +38,7 @@ import java.util.ArrayList;
 import es.dmoral.toasty.Toasty;
 import okhttp3.Call;
 
-public class ComicDetailActivity extends AppCompatActivity {
+public class ComicDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
     private CollapsingToolbarLayout mCollapsingToolbarLayout;
     private CoordinatorLayout parentView;
@@ -46,11 +48,13 @@ public class ComicDetailActivity extends AppCompatActivity {
     private TextView tvBookName;
     private TextView tvHit;
     private ImageView ivCover;
+    private TextView tvRead;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comic_detail);
+        ImmersionBar.with(this).init();
         initView();
         initData();
     }
@@ -103,7 +107,9 @@ public class ComicDetailActivity extends AppCompatActivity {
     private void initView() {
         tvBookName = (TextView) findViewById(R.id.tv_book_name);
         tvHit = (TextView) findViewById(R.id.tv_hit);
+        tvRead = (TextView) findViewById(R.id.tv_read);
         ivCover = (ImageView) findViewById(R.id.iv_cover);
+        tvRead.setOnClickListener(this);
 
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         mCollapsingToolbarLayout.setTitle(getString(R.string.app_name));
@@ -161,5 +167,13 @@ public class ComicDetailActivity extends AppCompatActivity {
     }
 
 
-
+    @Override
+    public void onClick(View v) {
+        if (v.getId()==R.id.tv_read){
+            Intent intent = new Intent(this, ComicReadActivity.class);
+            intent.putExtra("bookId", bookId);
+            intent.putExtra("chapterIndex", 1);
+            startActivity(intent);
+        }
+    }
 }

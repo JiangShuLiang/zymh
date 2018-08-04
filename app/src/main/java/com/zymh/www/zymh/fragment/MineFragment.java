@@ -15,9 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.mylhyl.circledialog.CircleDialog;
-import com.mylhyl.circledialog.callback.ConfigButton;
-import com.mylhyl.circledialog.params.ButtonParams;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zymh.www.zymh.R;
@@ -25,7 +22,6 @@ import com.zymh.www.zymh.Utils.CleanUtils;
 import com.zymh.www.zymh.Utils.Constants;
 import com.zymh.www.zymh.Utils.PreferenceUtils;
 import com.zymh.www.zymh.Utils.Utils;
-import com.zymh.www.zymh.activity.ComicDetailActivity;
 import com.zymh.www.zymh.activity.LoginActivity;
 import com.zymh.www.zymh.activity.WebActivity;
 import com.zymh.www.zymh.bean.UserInfo;
@@ -145,7 +141,8 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 showClearCacheDialog();
                 break;
             case R.id.layout_to_test:
-                startActivity(new Intent(getActivity(), ComicDetailActivity.class));
+                Utils.showLoadingDialog(getActivity(),"111");
+//                startActivity(new Intent(getActivity(), ComicDetailActivity.class));
                 break;
             case R.id.layout_logout:
                 PreferenceUtils.setPrefString(getActivity(), "username", "");
@@ -168,34 +165,14 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     }
 
     private void showClearCacheDialog() {
-        new CircleDialog.Builder(getActivity())
-                .setTitle("清除图片缓存")
-                .setTitleColor(0xffff8EB3)
-                .setSubTitleColor(0xff000000)
-                .setSubTitle("确定清除图片缓存?")
-                .setTextColor(0xff000000)
-                .setPositive("确定", new View.OnClickListener() {
+        Utils.showConfirmDialog(getActivity(), getChildFragmentManager(),
+                "清除缓存", "确认清除图片缓存？","确定", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         CleanUtils.cleanInternalCache(getActivity());
                         Toasty.success(getActivity(), "缓存清除成功!", Toast.LENGTH_SHORT, true).show();
                     }
-                })
-                .configPositive(new ConfigButton() {
-                    @Override
-                    public void onConfig(ButtonParams params) {
-                        params.textColor = 0xffff8EB3;
-                        params.textSize = 50;
-                    }
-                })
-                .setNegative("取消", null)
-                .configNegative(new ConfigButton() {
-                    @Override
-                    public void onConfig(ButtonParams params) {
-                        params.textSize = 50;
-                    }
-                })
-                .show();
+                });
     }
 
     private void sign(String token) {

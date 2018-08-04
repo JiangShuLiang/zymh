@@ -15,8 +15,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zymh.www.zymh.R;
+import com.zymh.www.zymh.Utils.Constants;
 import com.zymh.www.zymh.Utils.PreferenceUtils;
+import com.zymh.www.zymh.Utils.Utils;
 import com.zymh.www.zymh.activity.ComicReadActivity;
+import com.zymh.www.zymh.activity.LoginActivity;
+import com.zymh.www.zymh.activity.WebActivity;
 import com.zymh.www.zymh.adapter.ChapterAdapter;
 import com.zymh.www.zymh.bean.ComicDetailDataChapters;
 
@@ -75,11 +79,11 @@ public class ComicChaptersFragment extends Fragment implements View.OnClickListe
                 if (costCoin == 0 || costCoin == -1 || costCoin == -2) {//0免费，-1限免，-2已购
                     toReadComic(item);// 直接观看漫画
                 } else {
-                    // token不为空，有登录，提示用户跳转到购买界面
-                    if (PreferenceUtils.getPrefString(getActivity(), "token", "").equals("")) {
-                        // JSL: 2018/8/3 弹出dialog提示用户去购买 
-                    } else {// token为空，没登录，提示用户跳转到登录界面
-                        // JSL: 2018/8/3 弹出dialog提示用户去登录 
+                    if (!PreferenceUtils.getPrefString(getActivity(), "token", "").equals("")) {
+                        // token不为空=有登录，提示用户该章节收xx掌缘币
+                        showToRechargeDialog();
+                    } else {// token为空=没登录，提示用户跳转到登录界面
+                        showToLoginDialog();
                     }
                 }
             }
@@ -89,11 +93,54 @@ public class ComicChaptersFragment extends Fragment implements View.OnClickListe
         mRecyclerView.setAdapter(chapterAdapter);
     }
 
-    private void toReadComic(ComicDetailDataChapters item) {
-        Intent intent = new Intent(getActivity(), ComicReadActivity.class);
-        intent.putExtra("bookId", bookId);
-        intent.putExtra("chapterIndex", item.getChapterIndex());
-        startActivity(intent);
+
+    // 显示充值dialog
+    private void showToRechargeDialog() {
+        Utils.showConfirmDialog(getActivity(), getChildFragmentManager(),
+                "充值", "账户掌缘币不足,请先充值", "充值", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String token = PreferenceUtils.getPrefString(getActivity(), "token", "");
+                        Intent intent = new Intent(getActivity(), WebActivity.class);
+                        intent.putExtra("title", "掌缘币充值");
+                        intent.putExtra("url", Constants.URL_RECHARGE + token);
+                        startActivity(intent);
+                    }
+                });
+    }
+
+
+    // 显示登录dialog
+    private void showToLoginDialog() {
+        Utils.showConfirmDialog(getActivity(), getChildFragmentManager(),
+                "登录", "登录失效,请重新登录", "登陆", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        startActivityForResult(intent, Constants.REQUST_CODE_LOGIN);
+                    }
+                });
+    }
+
+    private void toReadComic(final ComicDetailDataChapters item) {
+        int costCoin = item.getCostCoin();
+        if (costCoin>0){
+            Utils.showConfirmDialog(getActivity(), getChildFragmentManager(),
+                    "温馨提示", "该漫画vip章节收费"+costCoin+"枚掌缘币", "了解", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getActivity(), ComicReadActivity.class);
+                            intent.putExtra("bookId", bookId);
+                            intent.putExtra("chapterIndex", item.getChapterIndex());
+                            startActivity(intent);
+                        }
+                    });
+        }else{
+            Intent intent = new Intent(getActivity(), ComicReadActivity.class);
+            intent.putExtra("bookId", bookId);
+            intent.putExtra("chapterIndex", item.getChapterIndex());
+            startActivity(intent);
+        }
     }
 
     private void initData() {

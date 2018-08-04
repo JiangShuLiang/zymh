@@ -32,7 +32,7 @@ public class ChapterAdapter extends BaseQuickAdapter<ComicDetailDataChapters, Ba
     protected void convert(BaseViewHolder viewHolder, ComicDetailDataChapters item) {
         this.viewHolder = viewHolder;
         viewHolder.setText(R.id.tv_chapter, "第"+item.getChapterIndex()+"章")
-                .setText(R.id.tv_update_time, "更新时间："+Utils.timestampToString((long)item.getUpdateDate()));
+                .setText(R.id.tv_update_time, "更新时间："+Utils.timestampToString(item.getUpdateDate()+""));
 
         ImageView ivLock = viewHolder.getView(R.id.iv_lock);
         TextView tvLock = viewHolder.getView(R.id.tv_lock);
